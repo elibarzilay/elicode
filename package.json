@@ -1,0 +1,55 @@
+{
+  "name": "elicode",
+  "displayName": "EliCode",
+  "description": "Eli's VSCode Hacks",
+  "categories": [ "Other" ],
+  "version": "0.0.1",
+  "engines": { "vscode": "^1.71.0" },
+  "main": "./out/extension.js",
+  "activationEvents": [ "*" ],
+  "contributes": {
+    "commands": [
+      { "command": "elicode.shellCommand", "title": "elicode.shellCommand" }
+    ],
+    "keybindings": [
+      { "key": "up", "command": "elicode.cursorMove", "args": { "to": "up", "select": false },
+        "when": "textInputFocus && !parameterHintsVisible && !suggestWidgetVisible" },
+      { "key": "shift+up", "command": "elicode.cursorMove", "args": { "to": "up", "select": true },
+        "when": "textInputFocus && !parameterHintsVisible && !suggestWidgetVisible" },
+      { "key": "down", "command": "elicode.cursorMove", "args": { "to": "down", "select": false },
+        "when": "textInputFocus && !parameterHintsVisible && !suggestWidgetVisible" },
+      { "key": "shift+down", "command": "elicode.cursorMove", "args": { "to": "down", "select": true },
+        "when": "textInputFocus && !parameterHintsVisible && !suggestWidgetVisible" },
+      { "key": "left", "command": "elicode.cursorMove", "args": { "to": "left", "select": false },
+        "when": "textInputFocus && !parameterHintsVisible && !suggestWidgetVisible" },
+      { "key": "shift+left", "command": "elicode.cursorMove", "args": { "to": "left", "select": true },
+        "when": "textInputFocus && !parameterHintsVisible && !suggestWidgetVisible" },
+      { "key": "right", "command": "elicode.cursorMove", "args": { "to": "right", "select": false },
+        "when": "textInputFocus && !parameterHintsVisible && !suggestWidgetVisible" },
+      { "key": "shift+right", "command": "elicode.cursorMove", "args": { "to": "right", "select": true },
+        "when": "textInputFocus && !parameterHintsVisible && !suggestWidgetVisible" }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/glob": "^7.2.0",
+    "@types/mocha": "^9.1.1",
+    "@types/node": "16.x",
+    "@types/vscode": "^1.71.0",
+    "@typescript-eslint/eslint-plugin": "^5.31.0",
+    "@typescript-eslint/parser": "^5.31.0",
+    "@vscode/test-electron": "^2.1.5",
+    "esbuild": "^0.15.7",
+    "eslint": "^8.20.0",
+    "glob": "^8.0.3",
+    "mocha": "^10.0.0",
+    "typescript": "^4.7.4"
+  }
+}
