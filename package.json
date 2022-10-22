@@ -6,6 +6,7 @@
   "version": "0.0.1",
   "engines": { "vscode": "^1.71.0" },
   "main": "./out/extension.js",
+  "files": [ "./out/**" ],
   "activationEvents": [ "*" ],
   "contributes": {
     "commands": [
@@ -31,12 +32,16 @@
     ]
   },
   "scripts": {
-    "vscode:prepublish": "npm run compile",
-    "compile": "tsc -p ./",
-    "watch": "tsc -watch -p ./",
+    "compile": "tsc",
+    "watch": "tsc -watch",
     "pretest": "npm run compile && npm run lint",
+    "test": "node ./out/test/runTest.js",
     "lint": "eslint src --ext ts",
-    "test": "node ./out/test/runTest.js"
+    "typecheck": "tsc --noEmit",
+    "esbuild-base": "esbuild ./src/extension.ts --bundle --outfile=out/extension.js --external:vscode --format=cjs --platform=node",
+    "esbuild": "npm run esbuild-base -- --sourcemap",
+    "esbuild-watch": "npm run esbuild-base -- --sourcemap --watch",
+    "vscode:prepublish": "typecheck && npm run esbuild-base -- --minify"
   },
   "devDependencies": {
     "@types/glob": "^7.2.0",
