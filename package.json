@@ -1,34 +1,40 @@
 {
   "name": "elicode",
+  "publisher": "elibarzilay",
   "displayName": "EliCode",
   "description": "Eli's VSCode Hacks",
   "categories": [ "Other" ],
   "version": "0.0.1",
   "engines": { "vscode": "^1.71.0" },
+  "extensionKind": ["workspace"],
   "main": "./out/extension.js",
   "files": [ "./out/**" ],
   "activationEvents": [ "*" ],
   "contributes": {
     "commands": [
-      { "command": "elicode.shellCommand", "title": "elicode.shellCommand" }
+      { "command": "elicode.openShell", "title": "elicode: Open Shell" }
     ],
     "keybindings": [
-      { "key": "up", "command": "elicode.cursorMove", "args": { "to": "up", "select": false },
+      { "key": "up", "command": "elicode.cursorMove", "args": { "to": "up", "select": false, "by": "wrappedLine" },
         "when": "textInputFocus && !parameterHintsVisible && !suggestWidgetVisible" },
-      { "key": "shift+up", "command": "elicode.cursorMove", "args": { "to": "up", "select": true },
+      { "key": "shift+up", "command": "elicode.cursorMove", "args": { "to": "up", "select": true, "by": "wrappedLine" },
         "when": "textInputFocus && !parameterHintsVisible && !suggestWidgetVisible" },
-      { "key": "down", "command": "elicode.cursorMove", "args": { "to": "down", "select": false },
+      { "key": "down", "command": "elicode.cursorMove", "args": { "to": "down", "select": false, "by": "wrappedLine" },
         "when": "textInputFocus && !parameterHintsVisible && !suggestWidgetVisible" },
-      { "key": "shift+down", "command": "elicode.cursorMove", "args": { "to": "down", "select": true },
+      { "key": "shift+down", "command": "elicode.cursorMove", "args": { "to": "down", "select": true, "by": "wrappedLine" },
         "when": "textInputFocus && !parameterHintsVisible && !suggestWidgetVisible" },
-      { "key": "left", "command": "elicode.cursorMove", "args": { "to": "left", "select": false },
+      { "key": "left", "command": "elicode.cursorMove", "args": { "to": "left", "select": false, "by": "wrappedLine" },
         "when": "textInputFocus && !parameterHintsVisible && !suggestWidgetVisible" },
-      { "key": "shift+left", "command": "elicode.cursorMove", "args": { "to": "left", "select": true },
+      { "key": "shift+left", "command": "elicode.cursorMove", "args": { "to": "left", "select": true, "by": "wrappedLine" },
         "when": "textInputFocus && !parameterHintsVisible && !suggestWidgetVisible" },
-      { "key": "right", "command": "elicode.cursorMove", "args": { "to": "right", "select": false },
+      { "key": "right", "command": "elicode.cursorMove", "args": { "to": "right", "select": false, "by": "wrappedLine" },
         "when": "textInputFocus && !parameterHintsVisible && !suggestWidgetVisible" },
-      { "key": "shift+right", "command": "elicode.cursorMove", "args": { "to": "right", "select": true },
-        "when": "textInputFocus && !parameterHintsVisible && !suggestWidgetVisible" }
+      { "key": "shift+right", "command": "elicode.cursorMove", "args": { "to": "right", "select": true, "by": "wrappedLine" },
+        "when": "textInputFocus && !parameterHintsVisible && !suggestWidgetVisible" },
+      { "key": "ctrl+`", "command": "elicode.openShell",
+        "when": "!terminalFocus" },
+      { "key": "ctrl+`", "command": "workbench.action.terminal.toggleTerminal",
+        "when": "terminalFocus" }
     ]
   },
   "scripts": {
@@ -41,7 +47,7 @@
     "esbuild-base": "esbuild ./src/extension.ts --bundle --outfile=out/extension.js --external:vscode --format=cjs --platform=node",
     "esbuild": "npm run esbuild-base -- --sourcemap",
     "esbuild-watch": "npm run esbuild-base -- --sourcemap --watch",
-    "vscode:prepublish": "typecheck && npm run esbuild-base -- --minify"
+    "vscode:prepublish": "npm run typecheck && npm run esbuild-base -- --minify"
   },
   "devDependencies": {
     "@types/glob": "^7.2.0",
