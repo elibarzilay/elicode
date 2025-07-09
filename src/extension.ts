@@ -26,25 +26,26 @@ export const activate = async (context: vscode.ExtensionContext) => {
         }
         return vscode.commands.executeCommand("cursorMove", opts);
       }),
-    vscode.commands.registerCommand(
-      "elicode.reindentSelectionWithSpaces",
-      async () => {
-        const editor = vscode.window.activeTextEditor;
-        if (!editor) return;
-        const qp = vscode.window.createQuickPick();
-        qp.items = "12345678".split("").map(n => ({ label: n }));
-        qp.placeholder = "Select indentation level";
-        qp.activeItems = [qp.items[1]]; // Default to "2"
-        const spaces = await new Promise<number>((res) => {
-          const ret = (n: number) => { qp.dispose(); res(n); };
-          qp.onDidAccept(() => ret(parseInt(qp.selectedItems[0]?.label || "0")));
-          qp.onDidHide(() => ret(-1));
-          qp.show();
-        });
-        if (spaces === -1) return;
-        Object.assign(editor.options, { tabSize: spaces, insertSpaces: true });
-        await vscode.commands.executeCommand("editor.action.reindentselectedlines");
-      }),
+    // Doesn't work because I can't figure out how to change the config options
+    // vscode.commands.registerCommand(
+    //   "elicode.reindentSelectionWithSpaces",
+    //   async () => {
+    //     const editor = vscode.window.activeTextEditor;
+    //     if (!editor) return;
+    //     const qp = vscode.window.createQuickPick();
+    //     qp.items = "12345678".split("").map(n => ({ label: n }));
+    //     qp.placeholder = "Select indentation level";
+    //     qp.activeItems = [qp.items[1]]; // Default to "2"
+    //     const spaces = await new Promise<number>((res) => {
+    //       const ret = (n: number) => { qp.dispose(); res(n); };
+    //       qp.onDidAccept(() => ret(parseInt(qp.selectedItems[0]?.label || "0")));
+    //       qp.onDidHide(() => ret(-1));
+    //       qp.show();
+    //     });
+    //     if (spaces === -1) return;
+    //     Object.assign(editor.options, { tabSize: spaces, insertSpaces: true });
+    //     await vscode.commands.executeCommand("editor.action.reindentselectedlines");
+    //   }),
     vscode.commands.registerCommand(
       "elicode.openShell",
       () => {

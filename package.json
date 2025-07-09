@@ -13,8 +13,7 @@
   "activationEvents": [ "*" ],
   "contributes": {
     "commands": [
-      { "command": "elicode.openShell", "title": "elicode: Open Shell" },
-      { "command": "elicode.reindentSelectionWithSpaces", "title": "elicode: Reindent with N Spaces" }
+      { "command": "elicode.openShell", "title": "elicode: Open Shell" }
     ],
     "keybindings": [
       { "key": "up", "command": "elicode.cursorMove", "args": { "to": "up", "select": false, "by": "wrappedLine" },
