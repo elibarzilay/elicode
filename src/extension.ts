@@ -62,4 +62,4 @@ export const activate = async (context: vscode.ExtensionContext) => {
   );
 };
 
-export const deactivate = () => { };
+export const deactivate = () => {};

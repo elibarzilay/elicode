@@ -1,15 +1,15 @@
 {
   "compilerOptions": {
     "module": "commonjs",
-    "target": "ES2020",
+    "target": "ES2022",
     "outDir": "out",
-    "lib": [ "ES2020" ],
+    "lib": [ "ES2022" ],
     "sourceMap": true,
     "rootDir": "src",
     "strict": true,
     /* Additional Checks */
     "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true, /* Report errors for fallthrough cases in switch statement. */
-    "noUnusedParameters": true,  /* Report errors on unused parameters. */
+    "noFallthroughCasesInSwitch": true,
+    "noUnusedParameters": true,
   }
 }

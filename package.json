@@ -3,12 +3,13 @@
   "publisher": "elibarzilay",
   "displayName": "EliCode",
   "description": "Eli's VSCode Hacks",
+  "repository": "https://github.com/elibarzilay/elicode/",
   "categories": [ "Other" ],
   "version": "0.0.1",
-  "engines": { "vscode": "^1.71.0" },
-  "extensionKind": ["workspace"],
+  "engines": { "vscode": "^1.95.0" },
+  "extensionKind": [ "workspace" ],
   "main": "./out/extension.js",
-  "files": [ "./out/**" ],
+  "files": [ "out/**", "package.json", "README.md", "LICENSE" ],
   "activationEvents": [ "*" ],
   "contributes": {
     "commands": [
@@ -38,22 +39,21 @@
     ]
   },
   "scripts": {
-    "compile": "tsc",
-    "watch": "tsc -watch",
-    "lint": "eslint src --ext ts",
+    "lint": "eslint --config .eslintrc.js src/**/*.ts",
     "typecheck": "tsc --noEmit",
     "esbuild-base": "esbuild ./src/extension.ts --bundle --outfile=out/extension.js --external:vscode --format=cjs --platform=node",
     "esbuild": "npm run esbuild-base -- --sourcemap",
-    "esbuild-watch": "npm run esbuild-base -- --sourcemap --watch",
-    "vscode:prepublish": "npm run typecheck && npm run esbuild-base -- --minify"
+    "vscode:prepublish": "npm run typecheck && npm run lint && npm run esbuild-base -- --minify",
+    "package": "vsce package --allow-star-activation"
   },
   "devDependencies": {
-    "@types/node": "16.x",
-    "@types/vscode": "^1.71.0",
-    "@typescript-eslint/eslint-plugin": "^5.31.0",
-    "@typescript-eslint/parser": "^5.31.0",
-    "esbuild": "^0.15.7",
-    "eslint": "^8.20.0",
-    "typescript": "^4.7.4"
+    "@types/node": "^22.10.0",
+    "@types/vscode": "^1.95.0",
+    "@typescript-eslint/eslint-plugin": "^8.15.0",
+    "@typescript-eslint/parser": "^8.15.0",
+    "@vscode/vsce": "^3.6.0",
+    "esbuild": "^0.24.2",
+    "eslint": "^9.30.0",
+    "typescript": "^5.7.2"
   }
 }
