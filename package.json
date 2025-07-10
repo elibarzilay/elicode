@@ -5,7 +5,7 @@
   "description": "Eli's VSCode Hacks",
   "repository": "https://github.com/elibarzilay/elicode/",
   "categories": [ "Other" ],
-  "version": "0.0.1",
+  "version": "0.0.2",
   "engines": { "vscode": "^1.95.0" },
   "extensionKind": [ "workspace" ],
   "main": "./out/extension.js",
@@ -32,19 +32,27 @@
         "when": "textInputFocus && !parameterHintsVisible && !suggestWidgetVisible" },
       { "key": "shift+right", "command": "elicode.cursorMove", "args": { "to": "right", "select": true, "by": "wrappedLine" },
         "when": "textInputFocus && !parameterHintsVisible && !suggestWidgetVisible" },
-      { "key": "ctrl+`", "command": "elicode.openShell",
+      { "key": "ctrl+`", "command": "elicode.openShell", "args": { "sync": true },
         "when": "!terminalFocus" },
-      { "key": "ctrl+`", "command": "workbench.action.terminal.toggleTerminal",
+      { "key": "ctrl+`", "command": "elicode.openShell", "args": { "inTerm": true },
+        "when": "terminalFocus" },
+      { "key": "ctrl+shift+`", "command": "elicode.openShell", "args": { "new": true } },
+      { "key": "ctrl+alt+`", "command": "elicode.openShell", "args": { "sync": false },
+        "when": "!terminalFocus" },
+      { "key": "ctrl+alt+`", "command": "workbench.action.terminal.toggleTerminal",
         "when": "terminalFocus" }
     ]
   },
   "scripts": {
     "lint": "eslint --config .eslintrc.js src/**/*.ts",
     "typecheck": "tsc --noEmit",
-    "esbuild-base": "esbuild ./src/extension.ts --bundle --outfile=out/extension.js --external:vscode --format=cjs --platform=node",
+    "esbuild-base": "esbuild ./src/extension.ts --bundle --outfile=out/extension.js --external:vscode --format=cjs --platform=node --keep-names",
     "esbuild": "npm run esbuild-base -- --sourcemap",
     "vscode:prepublish": "npm run typecheck && npm run lint && npm run esbuild-base -- --minify",
-    "package": "vsce package --allow-star-activation"
+    "package": "vsce package --allow-star-activation",
+    "package:rm-vsix": "rm -f elicode-*.vsix",
+    "package:install": "code --install-extension elicode-$(node -p \"require('./package.json').version\").vsix",
+    "package+install": "npm run package:rm-vsix && npm run package && npm run package:install"
   },
   "devDependencies": {
     "@types/node": "^22.10.0",
