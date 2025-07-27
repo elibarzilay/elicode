@@ -5,7 +5,7 @@
   "description": "Eli's VSCode Hacks",
   "repository": "https://github.com/elibarzilay/elicode/",
   "categories": [ "Other" ],
-  "version": "0.0.2",
+  "version": "0.0.3",
   "engines": { "vscode": "^1.95.0" },
   "extensionKind": [ "workspace" ],
   "main": "./out/extension.js",
@@ -13,7 +13,11 @@
   "activationEvents": [ "*" ],
   "contributes": {
     "commands": [
-      { "command": "elicode.openShell", "title": "elicode: Open Shell" }
+      { "command": "elicode.openShell", "title": "elicode: Open Shell" },
+      { "command": "elicode.moveCursorLineTo", "title": "elicode: Move current line to vertical position"},
+      { "command": "elicode.delayedCommand", "title": "elicode: Run a command after a delay" },
+      { "command": "elicode.cursorMove", "title": "elicode: Cursor Move" },
+      { "command": "elicode.reindentSelectionWithSpaces", "title": "elicode: Reindent selection with newly-set spaces" }
     ],
     "keybindings": [
       { "key": "up", "command": "elicode.cursorMove", "args": { "to": "up", "select": false, "by": "wrappedLine" },
